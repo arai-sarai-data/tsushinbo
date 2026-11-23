@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日本の通信簿 2026</title>
+<meta name="description" content="世界ランキングと政府統計で日本を採点。学力は世界一なのに、英語96位・女性議員145位・生産性28位。Japan's Report Card 2026 / 日本成绩单 / 일본 성적표">
+<meta property="og:title" content="日本の通信簿 2026 / Japan's Report Card 2026">
+<meta property="og:description" content="学力は世界一。なのに英語96位、女性議員145位、生産性28位。公開データで日本を採点。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* 通知表の紙・藍インク・朱の評定印。左に評定欄、右に所見欄という通知表の組みを踏襲 */
+  --paper:#f3f5f8;
+  --sheet:#ffffff;
+  --ink:#1b2a3f;
+  --ink-soft:#526073;
+  --rule:#d5dce4;
+  --shu:#c8331f;
+  --ai:#2c4f86;
+  --good:#2f7d4f;
+  --warn:#a8701a;
+  --bad:#c8331f;
+  --chip:#e8edf3;
+  --font-display:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho","Noto Serif CJK SC","Noto Serif KR",serif;
+  --font-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic","Noto Sans CJK SC","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10151c;--sheet:#18202a;--ink:#e6ebf1;--ink-soft:#a6b1bf;--rule:#2d3845;
+    --shu:#f07059;--ai:#93b6ee;--good:#5cc28a;--warn:#e2ab4f;--bad:#f07059;--chip:#232d39;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10151c;--sheet:#18202a;--ink:#e6ebf1;--ink-soft:#a6b1bf;--rule:#2d3845;
+  --shu:#f07059;--ai:#93b6ee;--good:#5cc28a;--warn:#e2ab4f;--bad:#f07059;--chip:#232d39;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.75;overflow-wrap:anywhere}
+a{color:var(--ai)}
+a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid var(--ai);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 0;border-bottom:1px solid var(--rule)}
+.brand{font-family:var(--font-display);font-weight:800;font-size:18px}
+.langs{display:flex;gap:4px;flex-wrap:wrap}
+.langs button{font:inherit;font-size:13px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);padding:3px 10px;border-radius:6px;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+header.hero{padding:36px 0 28px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-size:13px;letter-spacing:.08em;color:var(--ink-soft)}
+h1{font-family:var(--font-display);font-weight:800;font-size:clamp(28px,5.4vw,50px);line-height:1.25;margin:8px 0 14px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--shu);white-space:nowrap}
+:lang(ko) body,:lang(ko) h1,:lang(ko) h2,:lang(ko) h3,:lang(ko) p,:lang(ko) li,:lang(ko) td{word-break:keep-all}
+h2{font-family:var(--font-display);font-weight:800;font-size:clamp(22px,3.4vw,30px);line-height:1.35;margin:0 0 8px;text-wrap:balance}
+h3{font-size:17px;margin:0;line-height:1.45;text-wrap:balance}
+.lead{max-width:68ch;color:var(--ink-soft);margin:0}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0 0}
+.tile{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+.tile .n{font-family:var(--font-display);font-size:34px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.tile .l{font-size:13px;color:var(--ink-soft)}
+.tile.alert .n{color:var(--bad)}
+.tile.ok .n{color:var(--good)}
+.sharebar{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.btn{font:inherit;font-size:14px;font-weight:700;background:var(--ai);color:#fff;border:none;border-radius:8px;padding:8px 16px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn.ghost{background:var(--sheet);color:var(--ink);border:1px solid var(--rule)}
+:root[data-theme="dark"] .btn:not(.ghost){color:#10151c}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn:not(.ghost){color:#10151c}}
+section{padding:36px 0;border-bottom:1px solid var(--rule)}
+/* ねじれ */
+.gaps{display:grid;gap:12px;margin-top:16px}
+.gap{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.gap .side{padding:16px 18px}
+.gap .side.l{background:color-mix(in srgb,var(--good) 9%,transparent)}
+.gap .side.r{background:color-mix(in srgb,var(--bad) 9%,transparent);text-align:right}
+.gap .big{font-family:var(--font-display);font-weight:800;font-size:clamp(28px,5vw,42px);line-height:1.1;font-variant-numeric:tabular-nums}
+.gap .side.l .big{color:var(--good)}
+.gap .side.r .big{color:var(--bad)}
+.gap .cap{font-size:14px;color:var(--ink-soft)}
+.gap .vs{display:flex;align-items:center;padding:0 10px;font-weight:700;color:var(--ink-soft);font-size:14px}
+@media (max-width:560px){.gap{grid-template-columns:1fr}.gap .side.r{text-align:left}.gap .vs{padding:4px 18px;justify-content:center}}
+/* G7 */
+.g7tbl{display:grid;gap:6px;margin-top:16px}
+.g7row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:8px 14px}
+.dots{display:flex;gap:5px}
+.dots span{width:14px;height:14px;border-radius:50%;background:var(--chip);border:1px solid var(--rule)}
+.dots span.jp{background:var(--shu);border-color:var(--shu)}
+.dots span.jp.top{background:var(--good);border-color:var(--good)}
+.g7pos{font-size:13px;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.g7pos.last{color:var(--bad)}
+@media (max-width:520px){.g7row{grid-template-columns:1fr auto}.g7row .dots{grid-column:1 / -1}}
+/* 通知表 */
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0}
+.controls .lbl{font-size:13px;color:var(--ink-soft);margin-right:4px}
+.fbtn{font:inherit;font-size:14px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);padding:5px 12px;border-radius:999px;cursor:pointer}
+.fbtn[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+select{font:inherit;font-size:14px;padding:5px 10px;border:1px solid var(--rule);border-radius:8px;background:var(--sheet);color:var(--ink)}
+.card{display:grid;grid-template-columns:92px minmax(0,1fr);background:var(--sheet);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.grade{display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:1px dashed var(--rule);padding:12px 6px;gap:2px}
+.stamp{width:58px;height:58px;border-radius:50%;border:3px solid var(--shu);color:var(--shu);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:30px;font-weight:800;transform:rotate(-6deg)}
+.stamp.g4,.stamp.g5{border-color:var(--good);color:var(--good)}
+.stamp.g3{border-color:var(--warn);color:var(--warn)}
+.grade small{font-size:11px;color:var(--ink-soft)}
+.body{padding:14px 18px;display:grid;gap:8px;min-width:0}
+.row1{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;justify-content:space-between}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.cat{font-size:12px;background:var(--chip);border-radius:999px;padding:1px 10px;color:var(--ink-soft)}
+.badge{font-size:12px;font-weight:700;border-radius:999px;padding:1px 10px;color:var(--bad);border:1px solid var(--bad)}
+.badge.g{color:var(--good);border-color:var(--good)}
+.fig{font-variant-numeric:tabular-nums;font-size:15px}
+.fig b{font-family:var(--font-display);font-size:24px}
+.trend{font-size:13px;font-weight:700;padding:1px 8px;border-radius:6px;white-space:nowrap}
+.trend.up{color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
+.trend.down{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.trend.flat{color:var(--ink-soft);background:var(--chip)}
+.bar{position:relative;height:10px;border-radius:5px;background:linear-gradient(90deg,color-mix(in srgb,var(--good) 40%,transparent),color-mix(in srgb,var(--warn) 35%,transparent),color-mix(in srgb,var(--bad) 40%,transparent))}
+.bar i{position:absolute;top:-4px;width:4px;height:18px;border-radius:2px;background:var(--ink)}
+.barlbl{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:var(--ink-soft);margin-top:2px}
+.note{font-size:13px;color:var(--ink-soft)}
+.shoken,.rx{font-size:14.5px;margin:0}
+.shoken .k{font-weight:700;color:var(--shu)}
+.rx{padding:8px 12px;border-left:3px solid var(--ai);background:color-mix(in srgb,var(--ai) 7%,transparent);border-radius:0 6px 6px 0}
+.rx .k{font-weight:700;color:var(--ai)}
+.foot{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:space-between;align-items:center}
+.src{font-size:12.5px;color:var(--ink-soft)}
+.xshare{font-size:12.5px;font-weight:700;white-space:nowrap}
+.empty{color:var(--ink-soft);font-size:14px}
+/* 推移 */
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px;margin-top:16px}
+.chart{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:14px 14px 8px;min-width:0}
+.chart svg{width:100%;height:auto;display:block;color:var(--ink-soft)}
+.chart .cn{font-size:12.5px;color:var(--ink-soft);margin:2px 0 0}
+/* 国内 */
+.tblwrap{overflow-x:auto;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;margin-top:16px}
+table{border-collapse:collapse;width:100%;min-width:680px;font-size:14.5px}
+th,td{padding:10px 14px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+th{font-size:12.5px;color:var(--ink-soft);font-weight:500;background:var(--chip)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700}
+tr:last-child td{border-bottom:none}
+/* レバー */
+.levers{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:16px}
+.lever{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:16px}
+.lever .who{font-size:12px;color:var(--shu);font-weight:700;letter-spacing:.06em}
+.lever ul{margin:8px 0 0;padding-left:1.2em;font-size:14.5px}
+.copybox{display:grid;gap:8px;margin-top:20px}
+textarea{font:inherit;font-size:14px;width:100%;min-height:130px;padding:10px;border:1px solid var(--rule);border-radius:8px;background:var(--sheet);color:var(--ink);resize:vertical}
+ol.sources{font-size:13px;padding-left:1.4em;color:var(--ink-soft)}
+ol.sources li{margin-bottom:4px}
+footer{padding:28px 0 48px;font-size:13px;color:var(--ink-soft)}
+@media (max-width:520px){
+  .wrap{padding:0 16px}
+  .card{grid-template-columns:minmax(0,1fr)}
+  .grade{flex-direction:row;justify-content:flex-start;gap:10px;border-right:none;border-bottom:1px dashed var(--rule);padding:10px 12px}
+  .stamp{width:42px;height:42px;font-size:22px}
+  .tile .n{font-size:28px}
+  .body{padding:12px}
+  .fig b{font-size:20px}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="日本の通信簿 2026">
+<meta property="og:description" content="世界ランキングと政府統計で日本を採点。学力は世界一なのに、英語96位・女性議員145位・生産性28位。Japan&#x27;s Report Card 2026 / 日本成绩单 / 일본 성적표">
+<meta property="og:url" content="https://arai-sarai-data.github.io/tsushinbo/">
+<meta property="og:image" content="https://arai-sarai-data.github.io/tsushinbo/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://arai-sarai-data.github.io/tsushinbo/og.png">
+<link rel="canonical" href="https://arai-sarai-data.github.io/tsushinbo/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%23111%22/%3E%3Ctext x=%2232%22 y=%2244%22 font-size=%2234%22 text-anchor=%22middle%22 fill=%22%23ffd43b%22 font-family=%22sans-serif%22 font-weight=%22900%22%3E%E6%B4%97%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="wrap topbar">
+  <div class="brand" data-i18n="brand"></div>
+  <div class="langs" role="group" aria-label="Language">
+    <button type="button" data-lang="ja" aria-pressed="true">日本語</button>
+    <button type="button" data-lang="en" aria-pressed="false">English</button>
+    <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+    <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="eyebrow"></div>
+    <h1 data-i18n="headline"></h1>
+    <p class="lead" data-i18n="lead"></p>
+    <div class="summary" id="summary"></div>
+    <div class="sharebar">
+      <a class="btn" id="xHero" href="#" target="_blank" rel="noopener" data-i18n="shareX"></a>
+      <a class="btn ghost" href="#report" data-i18n="jumpReport"></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="gaps">
+  <div class="wrap">
+    <h2 data-i18n="gapsTitle"></h2>
+    <p class="lead" data-i18n="gapsLead"></p>
+    <div class="gaps" id="gapList"></div>
+  </div>
+</section>
+
+<section id="g7">
+  <div class="wrap">
+    <h2 data-i18n="g7Title"></h2>
+    <p class="lead" data-i18n="g7Lead"></p>
+    <div class="g7tbl" id="g7List"></div>
+  </div>
+</section>
+
+<section id="report">
+  <div class="wrap">
+    <h2 data-i18n="reportTitle"></h2>
+    <p class="lead" data-i18n="reportLead"></p>
+    <div class="controls">
+      <span class="lbl" data-i18n="filterLbl"></span>
+      <span id="catBtns" style="display:contents"></span>
+      <label class="lbl" for="sort" data-i18n="sortLbl" style="margin-left:8px"></label>
+      <select id="sort">
+        <option value="grade" data-i18n="sortGrade"></option>
+        <option value="gradeDesc" data-i18n="sortGradeDesc"></option>
+        <option value="trend" data-i18n="sortTrend"></option>
+      </select>
+    </div>
+    <div id="cards"></div>
+  </div>
+</section>
+
+<section id="trends">
+  <div class="wrap">
+    <h2 data-i18n="trendTitle"></h2>
+    <p class="lead" data-i18n="trendLead"></p>
+    <div class="charts" id="charts"></div>
+  </div>
+</section>
+
+<section id="domestic">
+  <div class="wrap">
+    <h2 data-i18n="domTitle"></h2>
+    <p class="lead" data-i18n="domLead"></p>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th scope="col" data-i18n="thItem"></th><th scope="col" data-i18n="thVal"></th><th scope="col" data-i18n="thChg"></th><th scope="col" data-i18n="thPt"></th><th scope="col" data-i18n="thSrc"></th></tr></thead>
+        <tbody id="dom"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="levers">
+  <div class="wrap">
+    <h2 data-i18n="leverTitle"></h2>
+    <p class="lead" data-i18n="leverLead"></p>
+    <div class="levers" id="leverList"></div>
+    <div class="copybox">
+      <label for="share"><b data-i18n="shareTitle"></b></label>
+      <textarea id="share" readonly></textarea>
+      <div class="sharebar" style="margin-top:0">
+        <button class="btn" id="copyBtn" type="button" data-i18n="copyBtn"></button>
+        <a class="btn ghost" id="xBottom" href="#" target="_blank" rel="noopener" data-i18n="shareX"></a>
+      </div>
+      <span class="note" id="copyMsg" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <h2 data-i18n="methodTitle"></h2>
+    <p class="note" style="max-width:72ch" data-i18n="methodText"></p>
+    <ol class="sources" id="sources"></ol>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap" data-i18n="footer"></div>
+</footer>
+
+<script>
+"use strict";
+const LANGS=["ja","en","zh","ko"];
+
+/* ---------- UI文言 ---------- */
+const T={
+ brand:{ja:"日本の通信簿 2026",en:"Japan's Report Card 2026",zh:"日本成绩单 2026",ko:"일본 성적표 2026"},
+ eyebrow:{ja:"公開データで見る国際比較 ／ 2026年11月23日時点の最新版",en:"International comparison from public data / latest editions as of 23 Nov 2026",zh:"基于公开数据的国际比较 ／ 截至2026年11月23日的最新版本",ko:"공개 데이터로 본 국제 비교 / 2026년 11월 23일 기준 최신판"},
+ headline:{ja:"学力は<em>世界一</em>。なのに、英語<em>96位</em>、女性議員<em>145位</em>、生産性<em>28位</em>。",en:"<em>No. 1</em> in school math. Yet <em>96th</em> in English, <em>145th</em> for women in parliament, <em>28th</em> in productivity.",zh:"学力<em>世界第一</em>。然而英语<em>第96</em>、女性议员<em>第145</em>、生产率<em>第28</em>。",ko:"학력은 <em>세계 1위</em>. 그런데 영어 <em>96위</em>, 여성 의원 <em>145위</em>, 생산성 <em>28위</em>."},
+ lead:{ja:"世界ランキングと政府統計を、学校の通知表の形に並べ直しました。評定は「世界の上から何割の位置にいるか」で機械的に決めています。苦手科目と、すでに手本を示している国が一目でわかります。",en:"We turned global rankings and government statistics into a school report card. Each grade is set mechanically by where Japan sits in the world ranking, so weak subjects, and the countries already showing a better way, are visible at a glance.",zh:"我们把世界排名和政府统计整理成学校成绩单的形式。评分按日本在世界排名中所处的位置机械地给出，一眼就能看出弱项科目和已经做出示范的国家。",ko:"세계 순위와 정부 통계를 학교 성적표 형식으로 다시 정리했습니다. 평정은 '세계에서 상위 몇 % 위치인가'로 기계적으로 매겼습니다. 약한 과목과 이미 본보기를 보여주는 나라가 한눈에 보입니다."},
+ shareX:{ja:"Xでシェア",en:"Share on X",zh:"分享到X",ko:"X에 공유"},
+ jumpReport:{ja:"通知表を見る",en:"See the report card",zh:"查看成绩单",ko:"성적표 보기"},
+ tAvg:{ja:"14科目の評定平均（5段階）",en:"Average grade across 14 subjects (out of 5)",zh:"14科平均评分（5分制）",ko:"14개 과목 평정 평균(5단계)"},
+ tWeak:{ja:"評定1〜2の苦手科目",en:"Weak subjects (grade 1–2)",zh:"弱项科目（1–2分）",ko:"약한 과목(평정 1~2)"},
+ tStrong:{ja:"評定4〜5の得意科目",en:"Strong subjects (grade 4–5)",zh:"强项科目（4–5分）",ko:"강한 과목(평정 4~5)"},
+ tG7:{ja:"G7で最下位の科目",en:"Subjects where Japan is last in the G7",zh:"在G7中垫底的科目",ko:"G7 최하위 과목"},
+ unitSubj:{ja:"科目",en:"",zh:"科",ko:"과목"},
+ gapsTitle:{ja:"ねじれ：同じ国とは思えない3組の数字",en:"Three pairs of numbers that don't add up",zh:"矛盾：难以相信出自同一国家的三组数字",ko:"뒤틀림: 같은 나라라고 믿기 어려운 세 쌍의 숫자"},
+ gapsLead:{ja:"日本は「力がない」のではなく、「力が成果に変わらない」国です。",en:"Japan doesn't lack capability. The problem is that capability isn't turning into results.",zh:"日本并非缺乏实力，而是实力没有转化为成果。",ko:"일본은 '힘이 없는' 나라가 아니라 '힘이 성과로 바뀌지 않는' 나라입니다."},
+ vs:{ja:"なのに",en:"yet",zh:"然而",ko:"그런데"},
+ g7Title:{ja:"G7の中の日本",en:"Japan within the G7",zh:"日本在G7中的位置",ko:"G7 속의 일본"},
+ g7Lead:{ja:"順位が確認できた科目だけ、7か国の中の位置を示しました。左が上位、朱の点が日本です。",en:"Japan's place among the seven G7 countries, for subjects where all positions could be confirmed. Left is best; the red dot is Japan.",zh:"仅列出可确认排名的科目中日本在七国中的位置。左侧为最好，红点为日本。",ko:"순위를 확인할 수 있었던 과목만 7개국 중 위치를 표시했습니다. 왼쪽이 상위, 붉은 점이 일본입니다."},
+ g7of:{ja:"7か国中{n}位",en:"{o} of 7",zh:"7国中第{n}",ko:"7개국 중 {n}위"},
+ g7last:{ja:"G7最下位",en:"Last in G7",zh:"G7垫底",ko:"G7 최하위"},
+ g7top:{ja:"G7トップ",en:"Top of G7",zh:"G7第一",ko:"G7 1위"},
+ reportTitle:{ja:"通知表：国際ランキング 14科目",en:"Report card: 14 international rankings",zh:"成绩单：14项国际排名",ko:"성적표: 국제 순위 14개 과목"},
+ reportLead:{ja:"◯の中の数字が評定（5が最高）。棒の黒い印は順位の位置で、左ほど上位です。各科目に、足を引っぱっている原因（所見）と、上位国の手本を添えました。",en:"The number in the circle is the grade (5 is best). The black mark on the bar shows the ranking position, with the top on the left. Each subject lists what's holding Japan back and what leading countries do.",zh:"圆圈中的数字为评分（5为最高）。条形上的黑色标记表示排名位置，越靠左越靠前。每科附有拖后腿的原因（评语）和领先国家的做法。",ko:"원 안의 숫자가 평정(5가 최고)입니다. 막대의 검은 표시는 순위 위치로, 왼쪽일수록 상위입니다. 과목마다 발목을 잡는 원인(소견)과 상위국 사례를 붙였습니다."},
+ filterLbl:{ja:"分野",en:"Area",zh:"领域",ko:"분야"},
+ all:{ja:"すべて",en:"All",zh:"全部",ko:"전체"},
+ sortLbl:{ja:"並べ替え",en:"Sort",zh:"排序",ko:"정렬"},
+ sortGrade:{ja:"評定の低い順",en:"Lowest grade first",zh:"评分从低到高",ko:"평정 낮은 순"},
+ sortGradeDesc:{ja:"評定の高い順",en:"Highest grade first",zh:"评分从高到低",ko:"평정 높은 순"},
+ sortTrend:{ja:"順位が下がった順",en:"Biggest drop first",zh:"名次下降最多优先",ko:"순위 하락 큰 순"},
+ grade:{ja:"評定",en:"Grade",zh:"评分",ko:"평정"},
+ shoken:{ja:"所見",en:"What's holding it back",zh:"评语",ko:"소견"},
+ rx:{ja:"手本",en:"What leaders do",zh:"他国做法",ko:"상위국 사례"},
+ src:{ja:"出典",en:"Source",zh:"来源",ko:"출처"},
+ top:{ja:"世界の上位",en:"World top",zh:"世界前列",ko:"세계 상위"},
+ bottom:{ja:"下位",en:"Bottom",zh:"末尾",ko:"하위"},
+ shareThis:{ja:"この科目をXでシェア",en:"Share this on X",zh:"分享此项到X",ko:"이 과목 X에 공유"},
+ noItems:{ja:"この分野の科目はありません。",en:"No subjects in this area.",zh:"该领域没有科目。",ko:"이 분야에는 과목이 없습니다."},
+ rankFmt:{ja:"{n}位 / {t}",en:"{o} of {t}",zh:"第{n}位 / {t}",ko:"{n}위 / {t}"},
+ up:{ja:"▲{d}（前回{p}位）",en:"▲{d} (prev. {po})",zh:"▲{d}（上次第{p}）",ko:"▲{d}(직전 {p}위)"},
+ down:{ja:"▼{d}（前回{p}位）",en:"▼{d} (prev. {po})",zh:"▼{d}（上次第{p}）",ko:"▼{d}(직전 {p}위)"},
+ flat:{ja:"横ばい（前回{p}位）",en:"Unchanged (prev. {po})",zh:"持平（上次第{p}）",ko:"변동 없음(직전 {p}위)"},
+ nocmp:{ja:"前回比較なし",en:"No prior comparison",zh:"无上次比较",ko:"직전 비교 없음"},
+ trendTitle:{ja:"推移：順位はどこから落ちたか",en:"Trends: how far the ranks have moved",zh:"趋势：排名从哪里滑落",ko:"추이: 순위는 어디서부터 떨어졌나"},
+ trendLead:{ja:"順位のグラフは上ほど上位です。点線は途中の年のデータを省いた区間です。",en:"In rank charts, higher is better. Dotted lines span years without plotted data.",zh:"排名图越往上越好。虚线表示中间年份未绘制数据的区间。",ko:"순위 그래프는 위로 갈수록 상위입니다. 점선은 중간 연도 데이터를 생략한 구간입니다."},
+ domTitle:{ja:"体力測定：国内統計 5項目",en:"Health check: 5 domestic statistics",zh:"体能测试：5项国内统计",ko:"체력 측정: 국내 통계 5개 항목"},
+ domLead:{ja:"順位がつかない国内統計は評定をつけず、前回からの変化で示します。",en:"Domestic figures without a world ranking are not graded; we show the change from the last reading instead.",zh:"没有世界排名的国内统计不评分，只显示与上次相比的变化。",ko:"순위가 없는 국내 통계는 평정하지 않고 직전 대비 변화로 표시합니다."},
+ thItem:{ja:"項目",en:"Item",zh:"项目",ko:"항목"},
+ thVal:{ja:"最新値",en:"Latest",zh:"最新值",ko:"최신값"},
+ thChg:{ja:"変化",en:"Change",zh:"变化",ko:"변화"},
+ thPt:{ja:"ポイント",en:"Key point",zh:"要点",ko:"포인트"},
+ thSrc:{ja:"出典",en:"Source",zh:"来源",ko:"출처"},
+ leverTitle:{ja:"苦手科目を動かすレバー",en:"Levers that could move the weak subjects",zh:"推动弱项科目的杠杆",ko:"약한 과목을 움직일 지렛대"},
+ leverLead:{ja:"評定1〜2の科目は、原因がいくつかの制度に集中しています。誰が動かせるかで並べました。",en:"The weak subjects trace back to a handful of institutions. Here they are, grouped by who can pull the lever.",zh:"1–2分科目的原因集中在少数几项制度上。按谁能推动来整理如下。",ko:"평정 1~2 과목의 원인은 몇몇 제도에 집중되어 있습니다. 누가 움직일 수 있는지로 정리했습니다."},
+ shareTitle:{ja:"この通信簿を広める（文面をコピーしてSNSや意見募集に貼り付けられます）",en:"Spread this report card (copy the text into social media or public comment forms)",zh:"传播这份成绩单（复制文字后可贴到社交媒体或意见征集）",ko:"이 성적표 알리기(문구를 복사해 SNS나 의견 수렴에 붙여 넣을 수 있습니다)"},
+ copyBtn:{ja:"文面をコピー",en:"Copy text",zh:"复制文字",ko:"문구 복사"},
+ copied:{ja:"コピーしました。",en:"Copied.",zh:"已复制。",ko:"복사했습니다."},
+ copyFail:{ja:"自動コピーできませんでした。選択された文面を Ctrl+C でコピーしてください。",en:"Couldn't copy automatically. The text is selected; press Ctrl+C (Cmd+C on Mac).",zh:"无法自动复制。文字已选中，请按 Ctrl+C 复制。",ko:"자동 복사에 실패했습니다. 선택된 문구를 Ctrl+C로 복사해 주세요."},
+ methodTitle:{ja:"評定のつけ方と出典",en:"How grades work, and sources",zh:"评分方法与来源",ko:"평정 방법과 출처"},
+ methodText:{ja:"評定は、順位を「上から何%の位置か」（(順位−1)÷(対象数−1)）に直し、上位10%以内=5、30%以内=4、60%以内=3、85%以内=2、それより下=1としました。対象国の数や顔ぶれは指標ごとに違うため、評定は同じ物差しで並べるための目安です。政府債務は「重い方から2位」なので向きを逆にしています。IMDのデジタル・AIランキングは2026年に評価方法が変わり、前年順位は新方法で再計算された値です。数値はすべて下記の公表元か、その内容を報じた記事で確認しました。",en:"Each rank is converted to a percentile, (rank − 1) ÷ (number ranked − 1). Top 10% = 5, top 30% = 4, top 60% = 3, top 85% = 2, below that = 1. Country coverage differs by index, so grades are a rough common yardstick. Government debt is ranked from the heaviest, so its direction is reversed. IMD changed its digital/AI method in 2026; the prior-year rank is IMD's recalculation under the new method. Every figure was checked against the publisher below or a news report of it.",zh:"把名次换算为百分位（(名次−1)÷(参评数−1)）：前10%=5，前30%=4，前60%=3，前85%=2，其余=1。各指标参评国家数量和构成不同，评分只是统一尺度的参考。政府债务按\"从重到轻第2\"排序，因此方向取反。IMD数字与AI排名于2026年更改方法，上年名次为按新方法重算的数值。所有数字均已对照下列发布机构或相关报道核实。",ko:"순위를 '상위 몇 % 위치'((순위−1)÷(대상 수−1))로 바꿔 상위 10% 이내=5, 30% 이내=4, 60% 이내=3, 85% 이내=2, 그 아래=1로 매겼습니다. 지표마다 대상국 수와 구성이 달라 평정은 같은 잣대로 비교하기 위한 기준입니다. 정부 부채는 '무거운 쪽에서 2위'라 방향을 반대로 했습니다. IMD 디지털·AI 순위는 2026년 평가 방법이 바뀌어 전년 순위는 새 방법으로 재산출한 값입니다. 모든 수치는 아래 발표처나 그 내용을 보도한 기사로 확인했습니다."},
+ footer:{ja:"日本の通信簿 2026 ／ 公開データのみで作成。数値は各機関の最新公表版（2026年11月23日確認）。",en:"Japan's Report Card 2026 / Built only from public data. Figures are each publisher's latest edition (checked 23 Nov 2026).",zh:"日本成绩单 2026 ／ 仅使用公开数据制作。数字为各机构最新发布版本（2026年11月23日核实）。",ko:"일본 성적표 2026 / 공개 데이터로만 제작. 수치는 각 기관 최신 발표판(2026년 11월 23일 확인)."},
+ hashtag:{ja:"#日本の通信簿",en:"#JapanReportCard",zh:"#日本成绩单",ko:"#일본성적표"},
+ shareHero:{ja:"日本の通信簿2026：学力は世界一なのに、英語96位、女性議員145位、生産性28位。G7最下位は{g7}科目。",en:"Japan's Report Card 2026: No. 1 in school math, yet 96th in English, 145th for women in parliament, 28th in productivity. Last in the G7 in {g7} subjects.",zh:"日本成绩单2026：学力世界第一，英语却第96、女性议员第145、生产率第28。在G7中垫底的科目有{g7}项。",ko:"일본 성적표 2026: 학력은 세계 1위인데 영어 96위, 여성 의원 145위, 생산성 28위. G7 최하위 과목은 {g7}개."},
+ shareItem:{ja:"日本の通信簿2026「{name}」は{rank}で評定{g}/5。",en:"Japan's Report Card 2026 — {name}: {rank}, grade {g}/5.",zh:"日本成绩单2026「{name}」：{rank}，评分{g}/5。",ko:"일본 성적표 2026 '{name}': {rank}, 평정 {g}/5."},
+ shareLong:{ja:"日本の通信簿2026（公開データの国際比較）\n評定平均 {avg}／5、苦手科目 {weak}、得意科目 {strong}、G7最下位 {g7}\n苦手：{lows}\n得意：15歳の数学 OECD1位、イノベーション12位、腐敗の少なさ18位\n学力も技術もあるのに、所得・英語・政治参加に結びついていない。",en:"Japan's Report Card 2026 (international comparison from public data)\nAverage grade {avg}/5 · weak subjects {weak} · strong subjects {strong} · last in G7 {g7}\nWeak: {lows}\nStrong: math at 15 (1st in OECD), innovation 12th, clean government 18th\nThe skills and technology are there, but they aren't turning into income, English or political participation.",zh:"日本成绩单2026（基于公开数据的国际比较）\n平均评分 {avg}/5，弱项 {weak} 科，强项 {strong} 科，G7垫底 {g7} 科\n弱项：{lows}\n强项：15岁数学OECD第1、创新第12、廉洁度第18\n有学力也有技术，却没有转化为收入、英语能力和政治参与。",ko:"일본 성적표 2026(공개 데이터 국제 비교)\n평정 평균 {avg}/5, 약한 과목 {weak}, 강한 과목 {strong}, G7 최하위 {g7}\n약점: {lows}\n강점: 15세 수학 OECD 1위, 혁신 12위, 청렴도 18위\n학력도 기술도 있는데 소득·영어·정치 참여로 이어지지 않는다."}
+};
+
+const CATS=[
+ {id:"econ",l:{ja:"経済",en:"Economy",zh:"经济",ko:"경제"}},
+ {id:"gov",l:{ja:"政治・統治",en:"Politics & governance",zh:"政治与治理",ko:"정치·거버넌스"}},
+ {id:"people",l:{ja:"人・教育",en:"People & education",zh:"人才与教育",ko:"인재·교육"}},
+ {id:"life",l:{ja:"くらし",en:"Wellbeing",zh:"生活",ko:"삶"}}
+];
+
+/* ---------- 出典 ---------- */
+const S={
+ wef26:{n:"WEF Global Gender Gap Report 2026（nippon.com）",u:"https://www.nippon.com/ja/japan-data/h02905/"},
+ wef26k:{n:"WEF 2026 分野別順位（共同通信・熊本日日新聞）",u:"https://kumanichi.com/articles/2036543"},
+ wef25:{n:"WEF Global Gender Gap Report 2025（nippon.com）",u:"https://www.nippon.com/ja/japan-data/h02444/"},
+ wefhist:{n:"内閣府男女共同参画局 GGI分野別比較（2012〜2018年）",u:"https://www.gender.go.jp/policy/positive_act/pdf/sankou1_23_09.pdf"},
+ wef06:{n:"ゴメス マーケティングデータ（GGI 2006年 80位/115か国）",u:"https://marketingdata.gomez.co.jp/topics_detail4/id=10754"},
+ wef21:{n:"現代ビジネス（GGI 2021年120位・2022年116位）",u:"https://gendai.media/articles/-/113403"},
+ wef23:{n:"nippon.com（GGI 2023年 125位）",u:"https://www.nippon.com/ja/japan-data/h01713/"},
+ ipu:{n:"内閣府男女共同参画局（IPU Women in Parliaments, 2026年1月1日現在）",u:"https://www.gender.go.jp/research/kenkyu/sankakujokyo/2025/pdf/9-1.pdf"},
+ ipu25:{n:"内閣府男女共同参画局（IPU, 2025年1月閲覧）",u:"https://www.gender.go.jp/research/kenkyu/sankakujokyo/2024/pdf/10-1.pdf"},
+ daiwa:{n:"大和総研コラム（英国労働党の女性候補者限定方式）",u:"https://www.dir.co.jp/report/column/20260909_012478.html"},
+ rsf26:{n:"RSF World Press Freedom Index 2026（nippon.com）",u:"https://www.nippon.com/en/japan-data/h02781/"},
+ rsf26us:{n:"SCMP（2026年 米国64位）",u:"https://scmp.com/week-asia/politics/article/3355198/self-censorship-behind-japans-problematic-press-freedom-ranking"},
+ rsf25:{n:"Japan Today（RSF 2025年 66位・記者クラブ批判）",u:"https://japantoday.com/category/national/japan-ranks-worst-among-g7-in-2025-world-press-freedom-rankings"},
+ rsf22:{n:"時事通信（RSF 2021年67位→2022年71位）",u:"https://sp.m.jiji.com/english/show/19526"},
+ rsf23:{n:"note（RSF 2023年 68位）",u:"https://note.com/tkatsumi06j/n/nc9301f596c98"},
+ rsf24:{n:"時事通信（RSF 2024年 70位）",u:"https://sp.m.jiji.com/english/show/32802"},
+ jpc:{n:"日本生産性本部「労働生産性の国際比較2025」",u:"https://kyodonewsprwire.jp/release/202512191380"},
+ jpcus:{n:"日本生産性本部 2025 解説（対米比52%）",u:"https://tc.keguanjp.com/kgjp_jish/imgs/2025/12/20251225_0_01.pdf"},
+ cao:{n:"内閣府 2024年度国民経済計算（時事通信）",u:"https://www.nippon.com/en/news/yjj2025122300838"},
+ caok:{n:"内閣府 2024年度国民経済計算（共同通信）",u:"https://www.oanda.jp/lab-education/market_news/kn_2025122301001929/"},
+ caoes:{n:"データ・マックス（スペインの成長要因）",u:"https://www.data-max.co.jp/article/82182"},
+ gdpit:{n:"MONOist（2023年 日本の一人当たりGDPがイタリアを下回る）",u:"https://monoist.itmedia.co.jp/mn/spv/2410/10/news010_2.html"},
+ imd26:{n:"IMD 世界競争力ランキング2026（宣伝会議）",u:"https://www.advertimes.com/?p=549033"},
+ imd25:{n:"IMD 世界競争力ランキング2025（IMD日本語発表）",u:"https://www.imd.org/news/imd%e3%81%8c%e4%b8%96%e7%95%8c%e7%ab%b6%e4%ba%89%e5%8a%9b%e3%83%a9%e3%83%b3%e3%82%ad%e3%83%b3%e3%82%b02025%e5%b9%b4%e7%89%88%e3%82%92%e7%99%ba%e8%a1%a8/"},
+ imdhist:{n:"東洋経済（IMD 1989〜92年1位、2024年38位）",u:"https://toyokeizai.net/articles/-/771092"},
+ imd22:{n:"東洋経済（IMD 2022年 34位）",u:"https://toyokeizai.net/articles/-/636942"},
+ imdai:{n:"JETRO（IMD 世界デジタル・AI競争力ランキング2026）",u:"https://www.jetro.go.jp/biznews/2026/11/2872af44c8d69f7c.html"},
+ imdaik:{n:"共同通信（アジア6位）",u:"https://news.yahoo.co.jp/articles/b9c22b6840df65d65a6b9f37fa065426540afa06"},
+ imdaio:{n:"EconoTimes（米国1位・中国7位・韓国10位）",u:"https://econotimes.com/South-Korea-Climbs-to-10th-in-2026-IMD-World-Digital-and-AI-Ranking-1774942"},
+ ef:{n:"EF英語能力指数2025 日本ファクトシート",u:"https://www.ef.com/assetscdn/WIBIwq6RdJvcD9bc8RMd/cefcom-epi-site/fact-sheets/2025/ef-epi-fact-sheet-japan-japanese.pdf"},
+ efpr:{n:"EF EPI 2025 発表（共同通信PRワイヤー）",u:"https://kyodonewsprwire.jp/release/202511199432"},
+ whr:{n:"World Happiness Report 2026（The Star）",u:"https://www.thestar.com.my/aseanplus/aseanplus-news/2026/03/21/finland-tops-world-happiness-rankings-again-as-thailand-slips-to-52nd"},
+ whrj:{n:"世界幸福度報告2026 解説（DXマガジン）",u:"https://dxmagazine.jp/news/r3/"},
+ whrfi:{n:"エレミニスト（フィンランドの社会的な支え・腐敗の少なさ）",u:"https://eleminist.com/article/4782"},
+ imf:{n:"IMF World Economic Outlook（GLOBAL NOTE 政府総債務残高対GDP比）",u:"https://www.globalnote.jp/post-12146.html"},
+ imfnet:{n:"IMF World Economic Outlook（GLOBAL NOTE 政府純債務残高対GDP比）",u:"https://www.globalnote.jp/post-12148.html"},
+ jetrodebt:{n:"JETRO世界貿易投資報告2025（社会保障費・利払い費）",u:"https://www.jetro.go.jp/world/gtir/2025/ch1/sec1/sub3.html"},
+ daiwait:{n:"大和総研（イタリア債務危機の教訓）",u:"https://www.dir.co.jp/report/research/economics/outlook/20260729_025944.html"},
+ ti:{n:"Transparency International 腐敗認識指数2025 日本",u:"https://www.transparency.org/en/countries/japan"},
+ tig7:{n:"AP通信（2025年 カナダ75・英国70・仏66・米64）",u:"https://www.yahoo.com/news/articles/survey-says-democracies-anti-corruption-060352315.html"},
+ tide:{n:"GLOBAL NOTE 腐敗認識指数2025（デンマーク89・ドイツ77）",u:"https://www.globalnote.jp/post-3913.html"},
+ tihist:{n:"World Scorecard（日本のCPI推移、2014年76点）",u:"https://worldscorecard.com/scorecards/japanese-scorecard/corruption-index/"},
+ wipo:{n:"WIPO Global Innovation Index 2026（日本の強み）",u:"https://www.wipo.int/web-publications-preview/global-innovation-index-2026/en/gii-2026-results.html"},
+ wipotbl:{n:"WIPO GII 2026 Executive Version（順位表）",u:"https://www.wipo.int/web-publications/global-innovation-index-2026-executive-version/assets/87166/2000-GII-2026 Executive Version - EN_150dpi.pdf"},
+ wipoc:{n:"WIPO GII 2026（東京・横浜クラスター）",u:"https://www.wipo.int/web-publications/global-innovation-index-2026/en/gii-2026-results.html"},
+ wipogoal:{n:"Qatar Tribune（政府目標 2035年までに4位以内）",u:"https://www.qatar-tribune.com/article/257712/business/japan-remains-12th-in-global-innovation-ranking"},
+ pisa:{n:"文部科学省・国立教育政策研究所 PISA2022のポイント",u:"https://www.mext.go.jp/content/20240524-mxt_chousa02-100002205_1.pdf"},
+ mhlw_b:{n:"厚生労働省 2025年人口動態統計（時事通信）",u:"https://www.nippon.com/ja/news/yjj2026060300610/"},
+ tfr:{n:"厚生労働省 合計特殊出生率の年次推移（2024年確定数）",u:"https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/kakutei24/dl/18_tfrR06.pdf"},
+ tfr2:{n:"Business Insider Japan（2005年1.26・2015年1.45）",u:"https://www.businessinsider.jp/article/293539/"},
+ mhlw_w:{n:"厚生労働省 毎月勤労統計2025年確報（JILPT）",u:"https://www.jil.go.jp/kokunai/blt/backnumber/2026/04/kokunai_01.html"},
+ mhlw_p:{n:"厚生労働省 2025年国民生活基礎調査（グッドネーバーズ・ジャパン）",u:"https://zaikei.co.jp/releases/3528448/"},
+ oecd_e:{n:"OECD 図表でみる教育2025：日本",u:"https://www.oecd.org/ja/publications/2025_e4cdb074-ja/c78ac36e-ja.html"},
+ eag_h:{n:"OECD 教育の概要2025（高等教育の公財政支出比率）",u:"https://www.keguanjp.com/kgjp_jiaoyu/imgs/2025/09/20250926_1_01.pdf"},
+ jil_m:{n:"厚生労働省 2025年度雇用均等基本調査（JILPT）",u:"https://www.jil.go.jp/kokunai/blt/backnumber/2026/10/kokunai_04.html"},
+ imd24d:{n:"IMD 世界デジタル競争力ランキング2024（日本語発表）",u:"https://www.imd.org/?p=200549"}
+};
+
+/* ---------- 国際ランキング14科目 ---------- */
+const ITEMS=[
+ {id:"ggi",cat:"gov",rank:117,total:145,prev:118,g7:7,src:["wef26","wef26k","wef25"],
+  name:{ja:"男女格差（ジェンダーギャップ指数）",en:"Gender gap (WEF Global Gender Gap Index)",zh:"性别差距（全球性别差距指数）",ko:"성별 격차(세계 성격차 지수)"},
+  value:{ja:"指数 0.670",en:"Score 0.670",zh:"指数 0.670",ko:"지수 0.670"},
+  note:{ja:"政治121位・経済119位・教育68位・健康49位",en:"Politics 121st, economy 119th, education 68th, health 49th",zh:"政治第121、经济第119、教育第68、健康第49",ko:"정치 121위·경제 119위·교육 68위·건강 49위"},
+  shoken:{ja:"初の女性首相が就任しても政治分野は121位。経済分野は女性管理職の少なさが響く。",en:"Even with Japan's first female prime minister, politics ranks only 121st. The economy score suffers from few women in management.",zh:"即使出现了首位女性首相，政治领域仍仅列第121位；经济领域受女性管理层比例低拖累。",ko:"첫 여성 총리가 취임했어도 정치 분야는 121위. 경제 분야는 여성 관리직이 적은 것이 발목을 잡는다."},
+  rx:{ja:"首位アイスランドは17回連続1位。英国は女性議員と女性閣僚を増やし、2024→25年に14位から4位へ上がった。",en:"Iceland has topped the index 17 times in a row. The UK rose from 14th to 4th (2024→2025) by raising the share of women MPs and ministers.",zh:"冰岛已连续17次位居第一。英国通过增加女性议员和女性部长，于2024→2025年从第14位升至第4位。",ko:"1위 아이슬란드는 17회 연속 1위. 영국은 여성 의원·장관을 늘려 2024→25년 14위에서 4위로 올랐다."}},
+ {id:"ipu",cat:"gov",rank:145,total:188,prev:140,g7:7,src:["ipu","ipu25","daiwa"],
+  name:{ja:"女性議員比率（衆議院）",en:"Women in parliament (lower house)",zh:"女性议员比例（众议院）",ko:"여성 의원 비율(중의원)"},
+  value:{ja:"15.5%（465人中72人）",en:"15.5% (72 of 465)",zh:"15.5%（465人中72人）",ko:"15.5%(465명 중 72명)"},
+  note:{ja:"参議院は29.8%",en:"Upper house: 29.8%",zh:"参议院为29.8%",ko:"참의원은 29.8%"},
+  shoken:{ja:"候補者男女均等法は努力義務にとどまり、政党に守らせる仕組みがない。",en:"Japan's law on gender-balanced candidates is only a duty to make efforts; parties face no penalty.",zh:"日本的候选人男女均等法仅为努力义务，没有约束政党的机制。",ko:"후보자 남녀균등법은 노력 의무에 그쳐 정당에 강제할 장치가 없다."},
+  rx:{ja:"英国労働党は1993年から一部選挙区の公認を女性候補に限り、女性議員比率を40%超に押し上げた。",en:"Since 1993 the UK Labour Party has used all-women shortlists in some seats, helping push the share of women MPs above 40%.",zh:"英国工党自1993年起在部分选区只提名女性候选人，推动女性议员比例超过40%。",ko:"영국 노동당은 1993년부터 일부 선거구 공천을 여성 후보로 한정해 여성 의원 비율을 40% 넘게 끌어올렸다."}},
+ {id:"rsf",cat:"gov",rank:62,total:180,prev:66,g7:6,src:["rsf26","rsf26us","rsf25"],
+  name:{ja:"報道の自由度（国境なき記者団）",en:"Press freedom (RSF)",zh:"新闻自由度（无国界记者）",ko:"언론 자유 지수(국경없는기자회)"},
+  value:{ja:"62.9点（「問題あり」区分）",en:"62.9 points (\"problematic\")",zh:"62.9分（\"有问题\"等级）",ko:"62.9점('문제 있음' 등급)"},
+  note:{ja:"2010年は12位",en:"12th in 2010",zh:"2010年曾列第12位",ko:"2010년에는 12위"},
+  shoken:{ja:"記者クラブ制度の閉鎖性、会見参加の制限、政府の介入、報道現場の男女格差が指摘されている。",en:"RSF cites the closed \"press club\" system, limits on press-conference access, government interference and gender inequality in newsrooms.",zh:"无国界记者指出记者俱乐部制度封闭、记者会参加受限、政府干预以及新闻界的性别不平等。",ko:"폐쇄적인 기자클럽 제도, 기자회견 참가 제한, 정부 개입, 언론계 성별 격차가 지적된다."},
+  rx:{ja:"首位ノルウェーは10年連続1位。会見の開放は法改正なしで始められる。",en:"Norway has ranked first for ten straight years. Opening up press conferences needs no change in the law.",zh:"挪威连续10年第一。开放记者会无需修法即可开始。",ko:"1위 노르웨이는 10년 연속 1위. 기자회견 개방은 법 개정 없이 시작할 수 있다."}},
+ {id:"prodh",cat:"econ",rank:28,total:38,prev:28,g7:null,src:["jpc","jpcus"],
+  name:{ja:"時間当たり労働生産性（OECD）",en:"Labour productivity per hour (OECD)",zh:"每小时劳动生产率（OECD）",ko:"시간당 노동생산성(OECD)"},
+  value:{ja:"60.1ドル（購買力平価）",en:"$60.1 (PPP)",zh:"60.1美元（购买力平价）",ko:"60.1달러(구매력평가)"},
+  note:{ja:"米国の52%。2018年は21位",en:"52% of the US level; 21st in 2018",zh:"为美国的52%；2018年为第21位",ko:"미국의 52%. 2018년엔 21위"},
+  shoken:{ja:"2024年の実質上昇率は−0.6%で38か国中33位。1997年に65%だった対米比は52%まで下がった。",en:"Real growth was −0.6% in 2024 (33rd of 38). Relative to the US, Japan fell from 65% in 1997 to 52%.",zh:"2024年实际增长率为−0.6%（38国中第33）。相对美国的水平从1997年的65%降至52%。",ko:"2024년 실질 증가율 −0.6%로 38개국 중 33위. 미국 대비 1997년 65%에서 52%로 떨어졌다."},
+  rx:{ja:"日本生産性本部は、生成AIなどデジタル技術を使った抜本的な業務改革を求めている。",en:"The Japan Productivity Center calls for sweeping work redesign using digital tools such as generative AI.",zh:"日本生产性本部呼吁利用生成式AI等数字技术进行根本性业务改革。",ko:"일본생산성본부는 생성형 AI 등 디지털 기술을 활용한 근본적 업무 개혁을 요구한다."}},
+ {id:"prodp",cat:"econ",rank:29,total:38,prev:29,g7:7,src:["jpc"],
+  name:{ja:"一人当たり労働生産性（OECD）",en:"Labour productivity per worker (OECD)",zh:"人均劳动生产率（OECD）",ko:"1인당 노동생산성(OECD)"},
+  value:{ja:"98,344ドル（購買力平価）",en:"$98,344 (PPP)",zh:"98,344美元（购买力平价）",ko:"98,344달러(구매력평가)"},
+  note:{ja:"ニュージーランド、スロバキアと同水準",en:"On a par with New Zealand and Slovakia",zh:"与新西兰、斯洛伐克相当",ko:"뉴질랜드·슬로바키아와 비슷한 수준"},
+  shoken:{ja:"G7で最も低い状態が続いている。",en:"Japan remains the lowest in the G7.",zh:"在G7中持续垫底。",ko:"G7 중 최하위가 이어지고 있다."},
+  rx:{ja:"長く働くより、付加価値の高い仕事へ人が移れるかがかぎになる。",en:"The key is moving people into higher-value work, not working longer hours.",zh:"关键不在延长工时，而在于让人转向高附加值工作。",ko:"오래 일하기보다 부가가치 높은 일로 사람이 옮겨갈 수 있느냐가 관건이다."}},
+ {id:"gdp",cat:"econ",rank:24,total:38,prev:22,g7:7,low:true,src:["cao","caok","caoes","gdpit"],
+  name:{ja:"一人当たり名目GDP（OECD）",en:"GDP per capita, nominal USD (OECD)",zh:"人均名义GDP（OECD）",ko:"1인당 명목 GDP(OECD)"},
+  value:{ja:"33,785ドル（2024年）",en:"$33,785 (2024)",zh:"33,785美元（2024年）",ko:"33,785달러(2024년)"},
+  note:{ja:"比較できる1994年以降で最低順位",en:"Lowest rank since comparable data began in 1994",zh:"自1994年有可比数据以来的最低名次",ko:"비교 가능한 1994년 이후 최저 순위"},
+  shoken:{ja:"円安でドル換算額が4.1%減り、スペインとスロベニアに抜かれた。21位の韓国とも差が開いた。",en:"The weak yen cut the dollar figure by 4.1%; Spain and Slovenia overtook Japan, and Korea (21st) pulled further ahead.",zh:"日元贬值使美元计值下降4.1%，被西班牙和斯洛文尼亚超越，与第21位的韩国差距拉大。",ko:"엔저로 달러 환산액이 4.1% 줄어 스페인·슬로베니아에 추월당했고, 21위 한국과도 격차가 벌어졌다."},
+  rx:{ja:"スペインは移民と観光客の増加も追い風に、2024年に3.5%成長した。",en:"Spain grew 3.5% in 2024, helped by immigration and tourism.",zh:"西班牙受移民和游客增加推动，2024年增长3.5%。",ko:"스페인은 이민과 관광객 증가에 힘입어 2024년 3.5% 성장했다."}},
+ {id:"imd",cat:"econ",rank:30,total:70,prev:35,g7:null,src:["imd26","imd25","imdhist","imd24d"],
+  name:{ja:"世界競争力（IMD）",en:"World Competitiveness Ranking (IMD)",zh:"世界竞争力（IMD）",ko:"세계 경쟁력(IMD)"},
+  value:{ja:"インフラ16位・雇用5位",en:"Infrastructure 16th, employment 5th",zh:"基础设施第16、就业第5",ko:"인프라 16위·고용 5위"},
+  note:{ja:"1989〜92年は1位。2024年に過去最低の38位",en:"1st in 1989–92; record low of 38th in 2024",zh:"1989–92年为第1；2024年创最低第38",ko:"1989~92년엔 1위, 2024년 역대 최저 38위"},
+  shoken:{ja:"2025年版でもビジネスの効率性は69か国中51位。企業の俊敏性や国際人材の活用に課題が残る。",en:"Business efficiency was still 51st of 69 in 2025; corporate agility and use of international talent lag.",zh:"2025年版中商业效率仍列69国中第51，企业敏捷性和国际人才运用仍是短板。",ko:"2025년판에서도 기업 효율성은 69개국 중 51위. 민첩성과 국제 인재 활용이 과제다."},
+  rx:{ja:"首位シンガポールは、ビジネスの効率性で1位を取り首位に返り咲いた。",en:"Singapore regained 1st place by ranking 1st in business efficiency.",zh:"新加坡凭借商业效率第一重回榜首。",ko:"1위 싱가포르는 기업 효율성 1위로 정상에 복귀했다."}},
+ {id:"imdai",cat:"econ",rank:19,total:70,prev:25,g7:null,src:["imdai","imdaik","imdaio"],
+  name:{ja:"デジタル・AI競争力（IMD）",en:"Digital & AI Ranking (IMD)",zh:"数字与AI竞争力（IMD）",ko:"디지털·AI 경쟁력(IMD)"},
+  value:{ja:"技術・インフラ4位",en:"Technology & infrastructure 4th",zh:"技术与基础设施第4",ko:"기술·인프라 4위"},
+  note:{ja:"前回順位は新しい評価方法での再計算値",en:"Prior rank recalculated under the new method",zh:"上次名次为按新方法重算的值",ko:"직전 순위는 새 방법으로 재산출한 값"},
+  shoken:{ja:"アジアでは6位。企業のAIバイアス対策（53位）や国家AI戦略の実施（45位）が弱い。",en:"Only 6th in Asia. Weak spots: handling AI bias in companies (53rd) and implementing a national AI strategy (45th).",zh:"在亚洲仅列第6。企业应对AI偏差（第53）和国家AI战略实施（第45）较弱。",ko:"아시아 6위. 기업의 AI 편향 대응(53위), 국가 AI 전략 실행(45위)이 약하다."},
+  rx:{ja:"首位は米国、2位シンガポール、3位オランダ。中国（7位）と韓国（10位）が日本より上。",en:"US 1st, Singapore 2nd, Netherlands 3rd; China (7th) and Korea (10th) rank above Japan.",zh:"美国第1、新加坡第2、荷兰第3；中国（第7）和韩国（第10）高于日本。",ko:"1위 미국, 2위 싱가포르, 3위 네덜란드. 중국(7위)·한국(10위)이 일본보다 위."}},
+ {id:"ef",cat:"people",rank:96,total:123,prev:96,g7:null,src:["ef","efpr"],
+  name:{ja:"英語力（EF英語能力指数）",en:"English proficiency (EF EPI)",zh:"英语能力（EF英语熟练度指数）",ko:"영어 능력(EF 영어능력지수)"},
+  value:{ja:"446点（世界平均488）",en:"446 (world average 488)",zh:"446分（世界平均488）",ko:"446점(세계 평균 488)"},
+  note:{ja:"最も低い「非常に低い」区分",en:"\"Very low\", the bottom band",zh:"最低的\"非常低\"等级",ko:"최하 '매우 낮음' 등급"},
+  shoken:{ja:"読む454・聞く437に対し、話す393・書く394。理解はできても使えない。",en:"Reading 454 and listening 437, but speaking 393 and writing 394: understood, but not used.",zh:"阅读454、听力437，但口语393、写作394——能听懂读懂却不会用。",ko:"읽기 454·듣기 437에 비해 말하기 393·쓰기 394. 이해는 해도 쓰지 못한다."},
+  rx:{ja:"マレーシア（24位）やフィリピン（28位）とは100点以上の差がある。",en:"Malaysia (24th) and the Philippines (28th) score more than 100 points higher.",zh:"与马来西亚（第24）、菲律宾（第28）相差100分以上。",ko:"말레이시아(24위)·필리핀(28위)과 100점 이상 차이가 난다."}},
+ {id:"whr",cat:"life",rank:61,total:147,prev:55,g7:null,src:["whr","whrj","whrfi"],
+  name:{ja:"幸福度（世界幸福度報告）",en:"Happiness (World Happiness Report)",zh:"幸福度（世界幸福报告）",ko:"행복도(세계행복보고서)"},
+  value:{ja:"6.130点（10点満点）",en:"6.130 out of 10",zh:"6.130分（满分10）",ko:"6.130점(10점 만점)"},
+  note:{ja:"アジアでは台湾26位が最高",en:"Highest in Asia: Taiwan (26th)",zh:"亚洲最高为台湾（第26）",ko:"아시아 최고는 대만(26위)"},
+  shoken:{ja:"所得水準は高いのに、人生の自己評価は世界の中位にとどまり、1年で6つ下がった。",en:"Despite high incomes, people rate their lives mid-table, and Japan fell six places in a year.",zh:"收入水平虽高，人生自评却处于世界中游，一年下降6位。",ko:"소득 수준은 높지만 삶의 자기평가는 세계 중위권이며 1년 새 6계단 떨어졌다."},
+  rx:{ja:"9年連続首位のフィンランドは、社会的な支えと腐敗の少なさで高得点を取る。",en:"Finland, first for nine years running, scores high on social support and low corruption.",zh:"连续9年第一的芬兰在社会支持和低腐败方面得分高。",ko:"9년 연속 1위 핀란드는 사회적 지지와 낮은 부패에서 높은 점수를 받는다."}},
+ {id:"debt",cat:"econ",rank:2,total:190,prev:null,g7:7,heavy:true,src:["imf","imfnet","jetrodebt","daiwait"],
+  name:{ja:"政府債務の重さ（IMF）",en:"Government debt burden (IMF)",zh:"政府债务负担（IMF）",ko:"정부 부채 부담(IMF)"},
+  value:{ja:"GDP比206.5%（2025年）",en:"206.5% of GDP (2025)",zh:"占GDP的206.5%（2025年）",ko:"GDP 대비 206.5%(2025년)"},
+  note:{ja:"純債務では136.5%で世界1位",en:"Net debt 136.5%: highest in the world",zh:"净债务136.5%，世界第一",ko:"순부채 136.5%로 세계 1위"},
+  shoken:{ja:"高齢化による社会保障費の増加と、金利上昇による利払い費の増加が重なる。",en:"Rising social-security costs from an ageing population now meet rising interest costs.",zh:"老龄化推高社保支出，又叠加利率上升带来的利息负担。",ko:"고령화에 따른 사회보장비 증가와 금리 상승에 따른 이자 비용 증가가 겹친다."},
+  rx:{ja:"イタリアは債務比率120%前後で2011〜12年に危機に陥った。きっかけは債務の大きさより財政運営への信認低下だった。",en:"Italy hit crisis in 2011–12 at around 120% of GDP; the trigger was lost confidence in fiscal management, not the debt level itself.",zh:"意大利在债务率约120%时于2011–12年陷入危机，诱因是对财政管理的信任下降，而非债务规模本身。",ko:"이탈리아는 부채비율 120% 안팎에서 2011~12년 위기를 겪었다. 계기는 부채 규모보다 재정 운영에 대한 신뢰 하락이었다."}},
+ {id:"cpi",cat:"gov",rank:18,total:182,prev:20,g7:3,src:["ti","tig7","tide","tihist"],
+  name:{ja:"腐敗の少なさ（腐敗認識指数）",en:"Clean government (Corruption Perceptions Index)",zh:"廉洁度（清廉指数）",ko:"청렴도(부패인식지수)"},
+  value:{ja:"71点（100点満点）",en:"71 out of 100",zh:"71分（满分100）",ko:"71점(100점 만점)"},
+  note:{ja:"G7ではドイツ・カナダに次ぐ3位",en:"3rd in the G7, behind Germany and Canada",zh:"G7中第3，仅次于德国、加拿大",ko:"G7에서 독일·캐나다 다음 3위"},
+  shoken:{ja:"公務員の汚職は世界的に少ない部類。ただし2014年の76点からは下がった。",en:"Public-sector corruption is low by world standards, though the score is down from 76 in 2014.",zh:"公职腐败在世界上属较少，但较2014年的76分有所下降。",ko:"공직 부패는 세계적으로 적은 편이나 2014년 76점에서 하락했다."},
+  rx:{ja:"首位デンマークは89点。",en:"Denmark leads with 89.",zh:"第一名丹麦为89分。",ko:"1위 덴마크는 89점."}},
+ {id:"gii",cat:"people",rank:12,total:139,prev:12,g7:4,src:["wipo","wipotbl","wipoc","wipogoal"],
+  name:{ja:"イノベーション（WIPO）",en:"Innovation (WIPO Global Innovation Index)",zh:"创新（WIPO全球创新指数）",ko:"혁신(WIPO 글로벌혁신지수)"},
+  value:{ja:"54.1点",en:"Score 54.1",zh:"54.1分",ko:"54.1점"},
+  note:{ja:"生産・輸出の複雑性は世界1位",en:"1st in the world for production & export complexity",zh:"生产与出口复杂度世界第1",ko:"생산·수출 복잡성 세계 1위"},
+  shoken:{ja:"特許（3位）と企業の研究開発（3位）は世界トップ級。東京・横浜は世界2位のイノベーション集積地。",en:"Patents (3rd) and business R&D (3rd) are world-class; Tokyo–Yokohama is the world's No. 2 innovation cluster.",zh:"专利（第3）和企业研发（第3）世界顶尖；东京—横滨是全球第2大创新集群。",ko:"특허(3위)·기업 R&D(3위)는 세계 최상위. 도쿄·요코하마는 세계 2위 혁신 클러스터."},
+  rx:{ja:"政府は2035年までに4位以内を目標に掲げる。",en:"The government aims for the top 4 by 2035.",zh:"政府目标是2035年前进入前4。",ko:"정부는 2035년까지 4위 이내를 목표로 한다."}},
+ {id:"pisa",cat:"people",rank:1,total:37,prev:null,g7:1,src:["pisa"],
+  name:{ja:"15歳の数学（PISA）",en:"Math at age 15 (PISA)",zh:"15岁学生数学（PISA）",ko:"15세 수학(PISA)"},
+  value:{ja:"536点（OECD平均472）",en:"536 (OECD average 472)",zh:"536分（OECD平均472）",ko:"536점(OECD 평균 472)"},
+  note:{ja:"科学1位・読解2位（OECD加盟国中）",en:"Science 1st, reading 2nd among OECD members",zh:"科学第1、阅读第2（OECD成员中）",ko:"과학 1위·읽기 2위(OECD 회원국 중)"},
+  shoken:{ja:"家庭の経済状況による得点差が小さく、低得点層も少ない。",en:"The score gap by family background is small, and few students score low.",zh:"家庭经济背景造成的分差小，低分群体也少。",ko:"가정 배경에 따른 점수 차가 작고 저득점층도 적다."},
+  rx:{ja:"この学力が大人の英語力や生産性につながっていないことが最大の課題。",en:"The challenge is that this doesn't carry over into adult English or productivity.",zh:"最大的问题是这一学力没有转化为成人的英语能力和生产率。",ko:"이 학력이 성인의 영어 능력과 생산성으로 이어지지 않는 것이 최대 과제다."}}
+];
+
+/* ---------- ねじれ3組 ---------- */
+const GAPS=[
+ {l:{big:"1",unit:{ja:"位",en:"st",zh:"",ko:"위"},pre:{ja:"",en:"",zh:"第",ko:""},cap:{ja:"15歳の数学（OECD加盟国中）",en:"Math at age 15 (among OECD members)",zh:"15岁学生数学（OECD成员中）",ko:"15세 수학(OECD 회원국 중)"}},
+  r:{big:"96",unit:{ja:"位",en:"th",zh:"",ko:"위"},pre:{ja:"",en:"",zh:"第",ko:""},cap:{ja:"大人の英語力（123か国中）",en:"Adult English proficiency (of 123)",zh:"成人英语能力（123国中）",ko:"성인 영어 능력(123개국 중)"}}},
+ {l:{big:"1",unit:{ja:"位",en:"st",zh:"",ko:"위"},pre:{ja:"",en:"",zh:"第",ko:""},cap:{ja:"生産・輸出の複雑性（WIPO）",en:"Production & export complexity (WIPO)",zh:"生产与出口复杂度（WIPO）",ko:"생산·수출 복잡성(WIPO)"}},
+  r:{big:"28",unit:{ja:"位",en:"th",zh:"",ko:"위"},pre:{ja:"",en:"",zh:"第",ko:""},cap:{ja:"時間当たり労働生産性（OECD38か国中）",en:"Labour productivity per hour (of 38 OECD)",zh:"每小时劳动生产率（OECD 38国中）",ko:"시간당 노동생산성(OECD 38개국 중)"}}},
+ {l:{big:{ja:"初",en:"1st",zh:"首位",ko:"첫"},unit:{ja:"",en:"",zh:"",ko:""},pre:{ja:"",en:"",zh:"",ko:""},cap:{ja:"女性首相が誕生（2025年10月）",en:"female prime minister (Oct 2025)",zh:"女性首相诞生（2025年10月）",ko:"여성 총리 탄생(2025년 10월)"}},
+  r:{big:"145",unit:{ja:"位",en:"th",zh:"",ko:"위"},pre:{ja:"",en:"",zh:"第",ko:""},cap:{ja:"衆院の女性議員比率（188か国中）",en:"Women in the lower house (of 188)",zh:"众议院女性议员比例（188国中）",ko:"중의원 여성 의원 비율(188개국 중)"}}}
+];
+
+/* ---------- 推移 ---------- */
+const CHARTS=[
+ {id:"cggi",rank:true,src:["wef06","wefhist","wef21","wef23","wef25","wef26"],
+  title:{ja:"男女格差の順位",en:"Gender gap rank",zh:"性别差距排名",ko:"성별 격차 순위"},
+  note:{ja:"2006年80位→2023年に過去最低125位。対象国数は年により115〜156",en:"80th in 2006 → record low 125th in 2023. Countries ranked vary from 115 to 156",zh:"2006年第80→2023年创最低第125。参评国数115–156不等",ko:"2006년 80위→2023년 역대 최저 125위. 대상국 수는 115~156"},
+  data:[[2006,80],[2012,101],[2013,105],[2014,104],[2015,101],[2016,111],[2017,114],[2018,110],[2021,120],[2022,116],[2023,125],[2024,118],[2025,118],[2026,117]]},
+ {id:"crsf",rank:true,src:["rsf26","rsf22","rsf23","rsf24","rsf25"],
+  title:{ja:"報道の自由度の順位",en:"Press freedom rank",zh:"新闻自由度排名",ko:"언론 자유 순위"},
+  note:{ja:"2010年に最高の12位。2022年は71位まで下落",en:"Best: 12th in 2010. Fell to 71st in 2022",zh:"2010年最好第12；2022年跌至第71",ko:"최고 2010년 12위. 2022년 71위까지 하락"},
+  data:[[2002,28],[2010,12],[2021,67],[2022,71],[2023,68],[2024,70],[2025,66],[2026,62]]},
+ {id:"cimd",rank:true,src:["imdhist","imd22","imd25","imd26"],
+  title:{ja:"世界競争力の順位（IMD）",en:"IMD competitiveness rank",zh:"IMD世界竞争力排名",ko:"IMD 세계 경쟁력 순위"},
+  note:{ja:"1989〜92年は4年連続1位。2024年に過去最低38位",en:"1st four years running (1989–92); record low 38th in 2024",zh:"1989–92年连续4年第1；2024年创最低第38",ko:"1989~92년 4년 연속 1위, 2024년 역대 최저 38위"},
+  data:[[1989,1],[1990,1],[1991,1],[1992,1],[2022,34],[2023,35],[2024,38],[2025,35],[2026,30]]},
+ {id:"ctfr",rank:false,src:["tfr","tfr2","mhlw_b"],
+  title:{ja:"合計特殊出生率",en:"Total fertility rate",zh:"总和生育率",ko:"합계출산율"},
+  note:{ja:"2015年に1.45まで戻した後、10年連続で低下",en:"Recovered to 1.45 in 2015, then fell ten years in a row",zh:"2015年回升至1.45后，连续10年下降",ko:"2015년 1.45까지 회복한 뒤 10년 연속 하락"},
+  data:[[1994,1.50],[1999,1.34],[2004,1.29],[2005,1.26],[2009,1.37],[2014,1.42],[2015,1.45],[2019,1.36],[2022,1.26],[2023,1.20],[2024,1.15],[2025,1.14]]}
+];
+
+/* ---------- 国内統計 ---------- */
+const DOM=[
+ {src:["mhlw_b"],cls:"down",val:"1.14",
+  name:{ja:"合計特殊出生率（2025年）",en:"Total fertility rate (2025)",zh:"总和生育率（2025年）",ko:"합계출산율(2025년)"},
+  chg:{ja:"過去最低・10年連続低下",en:"Record low, 10th straight fall",zh:"历史最低，连续10年下降",ko:"역대 최저·10년 연속 하락"},
+  pt:{ja:"出生数67万1,236人。国の推計より約15年早いペース。東京は0.96",en:"671,236 births, about 15 years ahead of official projections. Tokyo: 0.96",zh:"出生人数671,236人，比官方预测快约15年。东京为0.96",ko:"출생아 67만 1,236명, 정부 추계보다 약 15년 빠른 속도. 도쿄 0.96"}},
+ {src:["mhlw_w"],cls:"down",val:"−1.3%",
+  name:{ja:"実質賃金（2025年）",en:"Real wages (2025)",zh:"实际工资（2025年）",ko:"실질임금(2025년)"},
+  chg:{ja:"4年連続マイナス",en:"4th straight annual fall",zh:"连续4年下降",ko:"4년 연속 마이너스"},
+  pt:{ja:"名目賃金は+2.3%でも物価が3.7%上昇",en:"Nominal pay +2.3%, but prices +3.7%",zh:"名义工资+2.3%，物价却涨3.7%",ko:"명목임금 +2.3%에도 물가 3.7% 상승"}},
+ {src:["mhlw_p"],cls:"up",val:"11.0%",
+  name:{ja:"子どもの貧困率",en:"Child poverty rate",zh:"儿童贫困率",ko:"아동 빈곤율"},
+  chg:{ja:"前回11.5%から改善",en:"Down from 11.5%",zh:"较上次11.5%改善",ko:"직전 11.5%에서 개선"},
+  pt:{ja:"ひとり親世帯は44.7%（約2世帯に1世帯）",en:"Single-parent households: 44.7% (about 1 in 2)",zh:"单亲家庭为44.7%（约每2户1户）",ko:"한부모 가구는 44.7%(약 2가구 중 1가구)"}},
+ {src:["oecd_e","eag_h"],cls:"down",val:"3.9%",
+  name:{ja:"教育への支出（対GDP比）",en:"Education spending (% of GDP)",zh:"教育支出（占GDP）",ko:"교육 지출(GDP 대비)"},
+  chg:{ja:"OECD平均4.7%を下回る",en:"Below the OECD average of 4.7%",zh:"低于OECD平均4.7%",ko:"OECD 평균 4.7% 미만"},
+  pt:{ja:"大学など高等教育費のうち公費は37.5%（OECD平均67.4%）",en:"Public share of tertiary spending: 37.5% (OECD average 67.4%)",zh:"高等教育经费中公费占37.5%（OECD平均67.4%）",ko:"고등교육비 중 공적 부담 37.5%(OECD 평균 67.4%)"}},
+ {src:["jil_m"],cls:"up",val:"50.9%",
+  name:{ja:"男性の育児休業取得率（2025年度）",en:"Fathers taking parental leave (FY2025)",zh:"男性育儿假取得率（2025年度）",ko:"남성 육아휴직 사용률(2025년도)"},
+  chg:{ja:"5割を超えた",en:"Now above 50%",zh:"超过五成",ko:"50% 돌파"},
+  pt:{ja:"出生率の反転にはまだつながっていない",en:"Not yet reversing the birth rate",zh:"尚未扭转出生率",ko:"아직 출산율 반등으로 이어지지 않음"}}
+];
+
+/* ---------- レバー ---------- */
+const LEVERS=[
+ {who:{ja:"国会・政党",en:"Parliament & parties",zh:"国会与政党",ko:"국회·정당"},
+  h:{ja:"候補者の男女均等に実効性を持たせる",en:"Give gender-balanced candidate rules real teeth",zh:"让候选人男女均等真正有约束力",ko:"후보자 남녀 균등에 실효성 부여"},
+  li:[{ja:"英国労働党は1993年から一部選挙区で女性候補に限る公認を続け、女性議員比率は40%を超えた",en:"UK Labour's all-women shortlists since 1993 helped lift women MPs above 40%",zh:"英国工党自1993年在部分选区只提名女性，女性议员比例超过40%",ko:"영국 노동당은 1993년부터 일부 선거구 여성 한정 공천으로 여성 의원 비율 40% 돌파"},
+      {ja:"日本の候補者男女均等法は努力義務で、衆院の女性比率は15.5%",en:"Japan's equivalent law is non-binding; women hold 15.5% of lower-house seats",zh:"日本相关法律仅为努力义务，众议院女性占15.5%",ko:"일본 후보자 남녀균등법은 노력 의무, 중의원 여성 비율 15.5%"}]},
+ {who:{ja:"政府・報道機関",en:"Government & media",zh:"政府与媒体",ko:"정부·언론"},
+  h:{ja:"記者会見を開く",en:"Open up press conferences",zh:"开放记者会",ko:"기자회견 개방"},
+  li:[{ja:"記者クラブ制度がフリーや外国人記者を締め出し、自己検閲を生むと毎年指摘されている",en:"RSF says every year that the press club system shuts out freelance and foreign reporters and breeds self-censorship",zh:"无国界记者每年都指出记者俱乐部制度排斥自由和外国记者、助长自我审查",ko:"기자클럽 제도가 프리랜서·외국 기자를 배제하고 자기검열을 낳는다는 지적이 매년 나온다"},
+      {ja:"参加資格と人数制限の見直しは法改正なしで始められる",en:"Changing who may attend, and how many, needs no new law",zh:"调整参加资格和人数限制无需修法",ko:"참가 자격·인원 제한 재검토는 법 개정 없이 가능"}]},
+ {who:{ja:"企業・経営者",en:"Companies & executives",zh:"企业与经营者",ko:"기업·경영자"},
+  h:{ja:"稼ぐ力を戻す",en:"Rebuild earning power",zh:"恢复盈利能力",ko:"버는 힘 되살리기"},
+  li:[{ja:"時間当たり生産性は米国の52%。1997年の65%から差が広がった",en:"Hourly productivity is 52% of the US, down from 65% in 1997",zh:"每小时生产率为美国的52%，较1997年的65%差距扩大",ko:"시간당 생산성은 미국의 52%, 1997년 65%에서 격차 확대"},
+      {ja:"IMDはデジタルスキル、経営幹部の国際経験、ビジネスの俊敏性を最弱点に挙げてきた",en:"IMD has flagged digital skills, executives' international experience and business agility as Japan's weakest points",zh:"IMD一直把数字技能、高管国际经验和商业敏捷性列为日本最弱项",ko:"IMD는 디지털 역량, 경영진 국제 경험, 기업 민첩성을 최약점으로 꼽아 왔다"}]},
+ {who:{ja:"政府・自治体",en:"National & local government",zh:"中央与地方政府",ko:"정부·지자체"},
+  h:{ja:"大学と子育ての家計負担を減らす",en:"Cut household costs of university and childrearing",zh:"减轻大学与育儿的家庭负担",ko:"대학·육아의 가계 부담 줄이기"},
+  li:[{ja:"高等教育費のうち公費は37.5%で、OECD平均67.4%の半分強",en:"The public share of tertiary spending is 37.5%, just over half the OECD average of 67.4%",zh:"高等教育经费中公费占37.5%，仅略高于OECD平均67.4%的一半",ko:"고등교육비 중 공적 부담은 37.5%로 OECD 평균 67.4%의 절반 남짓"},
+      {ja:"出生数は国の推計より約15年早いペースで減っている",en:"Births are falling about 15 years ahead of official projections",zh:"出生人数比官方预测快约15年减少",ko:"출생아 수가 정부 추계보다 약 15년 빠르게 줄고 있다"}]}
+];
+
+/* ---------- ロジック ---------- */
+let lang="ja", cat="all", sortKey="grade";
+function L(o){ if(o==null) return ""; if(typeof o==="string") return o; return o[lang]!=null?o[lang]:o.ja; }
+function fmt(s,v){ return s.replace(/\{(\w+)\}/g,(m,k)=>v[k]!=null?v[k]:m); }
+function ord(n){ const s=["th","st","nd","rd"],v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function pct(it){ let p=(it.rank-1)/(it.total-1); if(it.heavy) p=1-p; return p; }
+function grade(p){ if(p<=0.10)return 5; if(p<=0.30)return 4; if(p<=0.60)return 3; if(p<=0.85)return 2; return 1; }
+ITEMS.forEach(it=>{ it.p=pct(it); it.g=grade(it.p); it.d=it.prev==null?0:it.prev-it.rank; });
+
+function rankText(it){
+  if(it.heavy) return {ja:"重い方から世界2位",en:"2nd heaviest in the world",zh:"世界第2重",ko:"세계에서 두 번째로 무거움"}[lang];
+  return fmt(L(T.rankFmt),{n:it.rank,t:it.total,o:ord(it.rank)});
+}
+function trendInfo(it){
+  if(it.prev==null) return {cls:"flat",txt:L(T.nocmp)};
+  const v={d:Math.abs(it.d),p:it.prev,po:ord(it.prev)};
+  if(it.d>0) return {cls:"up",txt:fmt(L(T.up),v)};
+  if(it.d<0) return {cls:"down",txt:fmt(L(T.down),v)};
+  return {cls:"flat",txt:fmt(L(T.flat),v)};
+}
+function g7Text(pos){
+  if(pos===7) return L(T.g7last);
+  if(pos===1) return L(T.g7top);
+  return fmt(L(T.g7of),{n:pos,o:ord(pos)});
+}
+function xUrl(text){ return "https://twitter.com/intent/tweet?text="+encodeURIComponent(text+" "+L(T.hashtag)); }
+function srcLinks(keys){ return keys.map(k=>'<a href="'+esc(S[k].u)+'">'+esc(S[k].n)+'</a>').join(" ／ "); }
+function stats(){
+  const weak=ITEMS.filter(i=>i.g<=2).length, strong=ITEMS.filter(i=>i.g>=4).length;
+  const g7last=ITEMS.filter(i=>i.g7===7).length;
+  const avg=(ITEMS.reduce((a,i)=>a+i.g,0)/ITEMS.length).toFixed(1);
+  return {weak,strong,g7last,avg};
+}
+
+function applyStatic(){
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ const k=el.dataset.i18n; el.innerHTML=L(T[k]); });
+  document.documentElement.lang = lang==="zh"?"zh-CN":lang;
+  document.title=L(T.brand);
+  document.querySelectorAll(".langs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===lang)));
+}
+function renderSummary(){
+  const s=stats(), u=L(T.unitSubj);
+  document.getElementById("summary").innerHTML=
+    '<div class="tile"><div class="n">'+s.avg+'</div><div class="l">'+esc(L(T.tAvg))+'</div></div>'+
+    '<div class="tile alert"><div class="n">'+s.weak+(u?'<small style="font-size:16px">'+u+'</small>':'')+'</div><div class="l">'+esc(L(T.tWeak))+'</div></div>'+
+    '<div class="tile ok"><div class="n">'+s.strong+(u?'<small style="font-size:16px">'+u+'</small>':'')+'</div><div class="l">'+esc(L(T.tStrong))+'</div></div>'+
+    '<div class="tile alert"><div class="n">'+s.g7last+(u?'<small style="font-size:16px">'+u+'</small>':'')+'</div><div class="l">'+esc(L(T.tG7))+'</div></div>';
+  const heroText=fmt(L(T.shareHero),{g7:s.g7last});
+  document.getElementById("xHero").href=xUrl(heroText);
+}
+function renderGaps(){
+  const side=(o,cls)=>{
+    const big = typeof o.big==="string"? o.big : L(o.big);
+    return '<div class="side '+cls+'"><div class="big">'+esc(L(o.pre))+esc(big)+'<span style="font-size:.5em">'+esc(L(o.unit))+'</span></div><div class="cap">'+esc(L(o.cap))+'</div></div>';
+  };
+  document.getElementById("gapList").innerHTML=GAPS.map(g=>'<div class="gap">'+side(g.l,"l")+'<div class="vs">'+esc(L(T.vs))+'</div>'+side(g.r,"r")+'</div>').join("");
+}
+function renderG7(){
+  const list=ITEMS.filter(i=>i.g7!=null).sort((a,b)=>b.g7-a.g7);
+  document.getElementById("g7List").innerHTML=list.map(it=>{
+    let dots=""; for(let k=1;k<=7;k++){ dots+='<span class="'+(k===it.g7?'jp'+(it.g7===1?' top':''):'')+'"></span>'; }
+    return '<div class="g7row"><a href="#'+it.id+'">'+esc(L(it.name))+'</a><div class="dots" role="img" aria-label="'+esc(g7Text(it.g7))+'">'+dots+'</div><div class="g7pos'+(it.g7===7?' last':'')+'">'+esc(g7Text(it.g7))+'</div></div>';
+  }).join("");
+}
+function renderCatBtns(){
+  const all=[{id:"all",l:T.all}].concat(CATS);
+  document.getElementById("catBtns").innerHTML=all.map(c=>'<button type="button" class="fbtn" data-cat="'+c.id+'" aria-pressed="'+(c.id===cat)+'">'+esc(L(c.l))+'</button>').join("");
+  document.querySelectorAll(".fbtn").forEach(b=>b.addEventListener("click",()=>{ cat=b.dataset.cat; renderCatBtns(); renderCards(); }));
+}
+function renderCards(){
+  let list=ITEMS.filter(it=>cat==="all"||it.cat===cat);
+  if(sortKey==="grade") list.sort((a,b)=>a.g-b.g||b.p-a.p);
+  if(sortKey==="gradeDesc") list.sort((a,b)=>b.g-a.g||a.p-b.p);
+  if(sortKey==="trend") list.sort((a,b)=>a.d-b.d||a.g-b.g);
+  const el=document.getElementById("cards");
+  if(!list.length){ el.innerHTML='<p class="empty">'+esc(L(T.noItems))+'</p>'; return; }
+  el.innerHTML=list.map(it=>{
+    const tr=trendInfo(it), rt=rankText(it), catL=L(CATS.find(c=>c.id===it.cat).l);
+    const badges=(it.g7===7?'<span class="badge">'+esc(L(T.g7last))+'</span>':'')+(it.g7===1?'<span class="badge g">'+esc(L(T.g7top))+'</span>':'');
+    const share=fmt(L(T.shareItem),{name:L(it.name),rank:rt,g:it.g});
+    return '<article class="card" id="'+it.id+'">'+
+      '<div class="grade"><div class="stamp g'+it.g+'" aria-label="'+esc(L(T.grade))+' '+it.g+'">'+it.g+'</div><small>'+esc(L(T.grade))+'</small></div>'+
+      '<div class="body">'+
+        '<div class="row1"><h3>'+esc(L(it.name))+'</h3><div class="tags">'+badges+'<span class="cat">'+esc(catL)+'</span></div></div>'+
+        '<div class="row1"><span class="fig"><b>'+esc(rt)+'</b>　'+esc(L(it.value))+'</span><span class="trend '+tr.cls+'">'+esc(tr.txt)+'</span></div>'+
+        '<div><div class="bar" role="img" aria-label="'+Math.round(it.p*100)+'%"><i style="left:calc('+(it.p*100).toFixed(1)+'% - 2px)"></i></div>'+
+        '<div class="barlbl"><span>'+esc(L(T.top))+'</span><span>'+esc(L(T.bottom))+'</span></div>'+
+        '<div class="note">'+esc(L(it.note))+'</div></div>'+
+        '<p class="shoken"><span class="k">'+esc(L(T.shoken))+'</span>　'+esc(L(it.shoken))+'</p>'+
+        '<p class="rx"><span class="k">'+esc(L(T.rx))+'</span>　'+esc(L(it.rx))+'</p>'+
+        '<div class="foot"><div class="src">'+esc(L(T.src))+'：'+srcLinks(it.src)+'</div><a class="xshare" href="'+esc(xUrl(share))+'" target="_blank" rel="noopener">'+esc(L(T.shareThis))+'</a></div>'+
+      '</div></article>';
+  }).join("");
+}
+function lineChart(c){
+  const W=520,H=230,ml=44,mr=40,mt=16,mb=30;
+  const xs=c.data.map(d=>d[0]), ys=c.data.map(d=>d[1]);
+  const x0=Math.min(...xs), x1=Math.max(...xs);
+  let y0,y1,ticks;
+  if(c.rank){ y0=1; y1=Math.ceil((Math.max(...ys)+5)/20)*20; const st=y1<=60?10:(y1<=100?20:30); ticks=[]; for(let v=0;v<=y1;v+=st) ticks.push(Math.max(1,v)); }
+  else { y0=1.0; y1=1.6; ticks=[1.0,1.2,1.4,1.6]; }
+  const X=v=>ml+(v-x0)/(x1-x0)*(W-ml-mr);
+  const Y=v=> c.rank ? mt+(v-y0)/(y1-y0)*(H-mt-mb) : mt+(y1-v)/(y1-y0)*(H-mt-mb);
+  let g='';
+  ticks.forEach(t=>{ g+='<line x1="'+ml+'" x2="'+(W-mr)+'" y1="'+Y(t).toFixed(1)+'" y2="'+Y(t).toFixed(1)+'" stroke="currentColor" stroke-opacity=".18"/>'+
+    '<text x="'+(ml-6)+'" y="'+(Y(t)+4).toFixed(1)+'" text-anchor="end" font-size="11" fill="currentColor">'+(c.rank?t:t.toFixed(1))+'</text>'; });
+  const xt=[x0,x1]; const mid=Math.round((x0+x1)/2/5)*5; if(mid>x0+3&&mid<x1-3) xt.splice(1,0,mid);
+  xt.forEach(t=>{ g+='<text x="'+X(t).toFixed(1)+'" y="'+(H-8)+'" text-anchor="middle" font-size="11" fill="currentColor">'+t+'</text>'; });
+  let path='';
+  for(let i=1;i<c.data.length;i++){
+    const a=c.data[i-1], b=c.data[i], dash=(b[0]-a[0])>3;
+    path+='<line x1="'+X(a[0]).toFixed(1)+'" y1="'+Y(a[1]).toFixed(1)+'" x2="'+X(b[0]).toFixed(1)+'" y2="'+Y(b[1]).toFixed(1)+'" stroke="var(--shu)" stroke-width="2.4"'+(dash?' stroke-dasharray="4 4" stroke-opacity=".6"':'')+' stroke-linecap="round"/>';
+  }
+  let pts=''; c.data.forEach((d,i)=>{ const last=i===c.data.length-1; pts+='<circle cx="'+X(d[0]).toFixed(1)+'" cy="'+Y(d[1]).toFixed(1)+'" r="'+(last?5:2.6)+'" fill="'+(last?'var(--shu)':'var(--sheet)')+'" stroke="var(--shu)" stroke-width="1.6"/>'; });
+  const ld=c.data[c.data.length-1];
+  const lab=c.rank?(lang==="en"?ord(ld[1]):(lang==="zh"?"第"+ld[1]:ld[1]+(lang==="ko"?"위":"位"))):ld[1].toFixed(2);
+  const ly=Y(ld[1])-10<14?Y(ld[1])+20:Y(ld[1])-10;
+  pts+='<text x="'+(X(ld[0])).toFixed(1)+'" y="'+ly.toFixed(1)+'" text-anchor="end" font-size="12" font-weight="700" fill="var(--ink)">'+esc(lab)+'</text>';
+  return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(L(c.title))+'">'+g+path+pts+'</svg>';
+}
+function renderCharts(){
+  document.getElementById("charts").innerHTML=CHARTS.map(c=>'<figure class="chart" style="margin:0"><h3>'+esc(L(c.title))+'</h3>'+lineChart(c)+'<figcaption class="cn">'+esc(L(c.note))+'</figcaption><div class="src" style="margin-top:4px">'+esc(L(T.src))+'：'+srcLinks(c.src)+'</div></figure>').join("");
+}
+function renderDom(){
+  document.getElementById("dom").innerHTML=DOM.map(d=>'<tr><td>'+esc(L(d.name))+'</td><td class="num">'+esc(d.val)+'</td><td><span class="trend '+d.cls+'">'+esc(L(d.chg))+'</span></td><td>'+esc(L(d.pt))+'</td><td class="src">'+srcLinks(d.src)+'</td></tr>').join("");
+}
+function renderLevers(){
+  document.getElementById("leverList").innerHTML=LEVERS.map(v=>'<div class="lever"><div class="who">'+esc(L(v.who))+'</div><h3>'+esc(L(v.h))+'</h3><ul>'+v.li.map(x=>'<li>'+esc(L(x))+'</li>').join("")+'</ul></div>').join("");
+  const s=stats();
+  const lows=ITEMS.filter(i=>i.g<=2&&!i.heavy).sort((a,b)=>b.p-a.p).slice(0,4).map(i=>L(i.name).replace(/[（(].*?[）)]/g,"").trim()+" "+(lang==="en"?ord(i.rank):(lang==="zh"?"第"+i.rank:i.rank+(lang==="ko"?"위":"位"))));
+  const txt=fmt(L(T.shareLong),{avg:s.avg,weak:s.weak,strong:s.strong,g7:s.g7last,lows:lows.join(lang==="en"?", ":"、")})+"\n"+L(T.hashtag);
+  document.getElementById("share").value=txt;
+  document.getElementById("xBottom").href=xUrl(fmt(L(T.shareHero),{g7:s.g7last}));
+}
+function renderSources(){
+  document.getElementById("sources").innerHTML=Object.values(S).map(s=>'<li><a href="'+esc(s.u)+'">'+esc(s.n)+'</a></li>').join("");
+}
+function renderAll(){ applyStatic(); renderSummary(); renderGaps(); renderG7(); renderCatBtns(); renderCards(); renderCharts(); renderDom(); renderLevers(); renderSources(); }
+
+function setLang(l,push){
+  if(!LANGS.includes(l)) l="ja";
+  lang=l;
+  try{ localStorage.setItem("tsushinbo-lang",l); }catch(e){}
+  if(push){ try{ history.replaceState(null,"","#"+l); }catch(e){ location.hash=l; } }
+  renderAll();
+}
+function initialLang(){
+  const h=(location.hash||"").slice(1);
+  if(LANGS.includes(h)) return h;
+  try{ const s=localStorage.getItem("tsushinbo-lang"); if(LANGS.includes(s)) return s; }catch(e){}
+  const n=(navigator.language||"ja").slice(0,2).toLowerCase();
+  return LANGS.includes(n)?n:"ja";
+}
+
+document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang,true)));
+window.addEventListener("hashchange",()=>{ const h=location.hash.slice(1); if(LANGS.includes(h)&&h!==lang) setLang(h,false); });
+document.getElementById("sort").addEventListener("change",e=>{ sortKey=e.target.value; renderCards(); });
+document.getElementById("copyBtn").addEventListener("click",async()=>{
+  const msg=document.getElementById("copyMsg"), t=document.getElementById("share");
+  try{ await navigator.clipboard.writeText(t.value); msg.textContent=L(T.copied); }
+  catch(e){ t.focus(); t.select(); msg.textContent=L(T.copyFail); }
+});
+
+/* 自己診断：翻訳漏れ・出典切れを検出（テスト用） */
+window.__selftest=function(){
+  const errs=[];
+  const chk=(o,path)=>{ if(o==null){errs.push(path+": missing");return;} if(typeof o==="string") return; LANGS.forEach(l=>{ if(o[l]==null||o[l]==="") errs.push(path+"."+l+": empty"); }); };
+  Object.keys(T).forEach(k=>{ if(k==="unitSubj") return; chk(T[k],"T."+k); });
+  CATS.forEach(c=>chk(c.l,"CAT."+c.id));
+  ITEMS.forEach(it=>{ ["name","value","note","shoken","rx"].forEach(f=>chk(it[f],it.id+"."+f)); it.src.forEach(s=>{ if(!S[s]) errs.push(it.id+": unknown source "+s); }); if(!CATS.find(c=>c.id===it.cat)) errs.push(it.id+": bad cat"); });
+  CHARTS.forEach(c=>{ chk(c.title,c.id+".title"); chk(c.note,c.id+".note"); c.src.forEach(s=>{ if(!S[s]) errs.push(c.id+": unknown source "+s); }); for(let i=1;i<c.data.length;i++){ if(c.data[i][0]<=c.data[i-1][0]) errs.push(c.id+": years not ascending"); } });
+  DOM.forEach((d,i)=>{ ["name","chg","pt"].forEach(f=>chk(d[f],"DOM"+i+"."+f)); d.src.forEach(s=>{ if(!S[s]) errs.push("DOM"+i+": unknown source "+s); }); });
+  LEVERS.forEach((v,i)=>{ chk(v.who,"LEV"+i+".who"); chk(v.h,"LEV"+i+".h"); v.li.forEach((x,j)=>chk(x,"LEV"+i+".li"+j)); });
+  GAPS.forEach((g,i)=>{ ["l","r"].forEach(s=>{ chk(g[s].cap,"GAP"+i+s+".cap"); }); });
+  ITEMS.forEach(it=>{ if(it.rank<1||it.rank>it.total) errs.push(it.id+": rank out of range"); if(it.g<1||it.g>5) errs.push(it.id+": bad grade"); });
+  const used=new Set(); ITEMS.forEach(i=>i.src.forEach(s=>used.add(s))); CHARTS.forEach(c=>c.src.forEach(s=>used.add(s))); DOM.forEach(d=>d.src.forEach(s=>used.add(s)));
+  Object.keys(S).forEach(k=>{ if(!used.has(k)) errs.push("source unused: "+k); });
+  return errs;
+};
+
+setLang(initialLang(),false);
+</script>
+</body>
+</html>
